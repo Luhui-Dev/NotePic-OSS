@@ -3,7 +3,7 @@ requires = ["setuptools>=64", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "md-image-oss"
+name = "notepic-oss"
 dynamic = ["version"]
 description = "Upload Markdown / MDX / HTML images to Aliyun OSS, with high-quality compression."
 readme = "README.md"
@@ -24,10 +24,11 @@ dependencies = [
 ]
 
 [project.scripts]
-md-oss = "md_image_oss.cli:main"
+notepic-oss = "notepic_oss.cli:main"
+md-oss = "notepic_oss.cli:main"
 
 [tool.setuptools.dynamic]
-version = { attr = "md_image_oss.__version__" }
+version = { attr = "notepic_oss.__version__" }
 
 [tool.setuptools.packages.find]
-include = ["md_image_oss*"]
+include = ["notepic_oss*"]

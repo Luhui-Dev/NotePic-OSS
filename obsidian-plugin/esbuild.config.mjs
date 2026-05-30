@@ -5,8 +5,8 @@ import builtins from "builtin-modules";
 const prod = process.argv[2] === "production";
 
 const banner = `/*
- * md-image-oss — Obsidian plugin
- * https://github.com/Luhui-Dev/md-image-oss
+ * NotePic OSS — Obsidian plugin
+ * https://github.com/Luhui-Dev/notepic-oss
  */`;
 
 const ctx = await esbuild.context({

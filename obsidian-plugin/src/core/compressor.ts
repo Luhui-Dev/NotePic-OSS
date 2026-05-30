@@ -1,4 +1,4 @@
-// High-quality image compression that mirrors md_image_oss/compressor.py:
+// High-quality image compression that mirrors notepic_oss/compressor.py:
 //   - JPEG / WebP via Canvas (re-encode at the configured quality)
 //   - PNG via UPNG.js (quantize + deflate; closest to pngquant)
 //   - GIF / SVG / BMP / ICO / TIFF / animated images passthrough

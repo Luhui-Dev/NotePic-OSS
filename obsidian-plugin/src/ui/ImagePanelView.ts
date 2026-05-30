@@ -4,14 +4,14 @@
 // tracked against the active file.
 
 import { ItemView, MarkdownView, TFile, WorkspaceLeaf, setIcon, setTooltip } from "obsidian";
-import type MdImageOssPlugin from "../main";
+import type NotePicOssPlugin from "../main";
 import { scanNote, type ScannedItem } from "../core/pipeline";
 import { Uploader } from "../core/uploader";
 import { buildUploaderConfig } from "../settings";
 import { collectSizes, fmtSize } from "../util/sizes";
 import { t } from "../i18n";
 
-export const VIEW_TYPE_MDOSS_PANEL = "md-image-oss-panel";
+export const VIEW_TYPE_NOTEPIC_OSS_PANEL = "notepic-oss-panel";
 
 type Filter = "all" | "local" | "pending" | "missing";
 
@@ -41,11 +41,11 @@ export class ImagePanelView extends ItemView {
   // for everything, which is fine for display purposes.
   private displayUploader: Uploader | null = null;
 
-  constructor(leaf: WorkspaceLeaf, private readonly plugin: MdImageOssPlugin) {
+  constructor(leaf: WorkspaceLeaf, private readonly plugin: NotePicOssPlugin) {
     super(leaf);
   }
 
-  getViewType(): string { return VIEW_TYPE_MDOSS_PANEL; }
+  getViewType(): string { return VIEW_TYPE_NOTEPIC_OSS_PANEL; }
   getDisplayText(): string { return t().panel.title; }
   getIcon(): string { return "image-up"; }
 

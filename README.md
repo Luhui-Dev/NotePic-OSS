@@ -1,11 +1,11 @@
-# md-image-oss
+# NotePic OSS
 
 > Upload images in Markdown / MDX / HTML to Aliyun OSS — compress, dedupe, and rewrite links in place.
 
-[![License](https://img.shields.io/github/license/Luhui-Dev/md-image-oss)](LICENSE)
+[![License](https://img.shields.io/github/license/Luhui-Dev/notepic-oss)](LICENSE)
 [![Python](https://img.shields.io/badge/python-3.9%2B-blue)](https://www.python.org/downloads/)
-[![CLI Release](https://img.shields.io/github/v/release/Luhui-Dev/md-image-oss?filter=v*&label=cli)](https://github.com/Luhui-Dev/md-image-oss/releases?q=tag%3Av&expanded=true)
-[![Plugin Release](https://img.shields.io/github/v/release/Luhui-Dev/md-image-oss?filter=plugin-v*&label=plugin)](https://github.com/Luhui-Dev/md-image-oss/releases?q=tag%3Aplugin-v&expanded=true)
+[![CLI Release](https://img.shields.io/github/v/release/Luhui-Dev/notepic-oss?filter=v*&label=cli)](https://github.com/Luhui-Dev/notepic-oss/releases?q=tag%3Av&expanded=true)
+[![Plugin Release](https://img.shields.io/github/v/release/Luhui-Dev/notepic-oss?filter=plugin-v*&label=plugin)](https://github.com/Luhui-Dev/notepic-oss/releases?q=tag%3Aplugin-v&expanded=true)
 
 把 Markdown / MDX / HTML 文档里的所有图片上传到阿里云 OSS，并自动重写文档里的图片链接。上传前先做一次高质量的本地压缩，配置全部从环境变量读取。
 
@@ -13,7 +13,7 @@
 
 | 形态 | 适合场景 | 入口 |
 |---|---|---|
-| **CLI**（本仓库根目录） | 批量处理、CI / 服务器、与构建脚本组合 | `md-oss` 命令，见下方「快速上手」 |
+| **CLI**（本仓库根目录） | 批量处理、CI / 服务器、与构建脚本组合 | `notepic-oss` 命令，见下方「快速上手」 |
 | **Obsidian 插件**（[`obsidian-plugin/`](obsidian-plugin/)） | 在 Obsidian 笔记里一键上传 + 多选图片管理 Modal | 见 [obsidian-plugin/README.md](obsidian-plugin/README.md) |
 
 两端命名约定一致（`<prefix>/<sha256[:24]>.<ext>`），CLI 上传过的图在插件里识别为「已在自家 OSS」自动跳过，反之亦然。
@@ -28,13 +28,13 @@ pip install -e .
 cp .env.example .env && $EDITOR .env
 
 # 3. 处理一篇文章（默认输出到 article.oss.md）
-md-oss article.md --env-file .env
+notepic-oss article.md --env-file .env
 ```
 
 实际效果：
 
 ```text
-$ md-oss posts/2024-trip.md -i --env-file .env
+$ notepic-oss posts/2024-trip.md -i --env-file .env
 📖 Reading posts/2024-trip.md
 🔄 Processing images...
   ✓ ./images/cover.png
@@ -61,8 +61,8 @@ $ md-oss posts/2024-trip.md -i --env-file .env
 ## 安装
 
 ```bash
-git clone <this-repo> md-image-oss
-cd md-image-oss
+git clone <this-repo> notepic-oss
+cd notepic-oss
 pip install -e .
 ```
 
@@ -70,7 +70,7 @@ pip install -e .
 
 ```bash
 pip install -r requirements.txt
-python -m md_image_oss <article.md>
+python -m notepic_oss <article.md>
 ```
 
 需要 Python 3.9+。
@@ -99,42 +99,42 @@ cp .env.example .env
 
 ```bash
 # 在系统已有环境变量的前提下，最简形式：
-md-oss article.md
+notepic-oss article.md
 # → 生成 article.oss.md
 
 # 直接覆盖原文：
-md-oss article.md --in-place
+notepic-oss article.md --in-place
 
 # 指定输出路径：
-md-oss article.md -o dist/article.md
+notepic-oss article.md -o dist/article.md
 
 # 临时从 .env 文件加载配置：
-md-oss article.md --env-file .env
+notepic-oss article.md --env-file .env
 
 # 调整压缩质量（1–100，默认 85）：
-md-oss article.md -q 90
+notepic-oss article.md -q 90
 
 # 跳过压缩：
-md-oss article.md --no-compress
+notepic-oss article.md --no-compress
 
 # 把已经在外网的图也搬运一份到自己 OSS（比如别人博客的盗链图）：
-md-oss article.md --process-remote
+notepic-oss article.md --process-remote
 
 # 预览结果但不写文件，结果走 stdout：
-md-oss article.md --dry-run > preview.md
+notepic-oss article.md --dry-run > preview.md
 
 # 静默模式：
-md-oss article.md -i --quiet
+notepic-oss article.md -i --quiet
 
 # Obsidian：默认识别 ![[image.png]]，附件不与笔记同目录时可显式指定 vault 根：
-md-oss note.md --obsidian-vault ~/Obsidian/MyVault
+notepic-oss note.md --obsidian-vault ~/Obsidian/MyVault
 
 # 关掉 wikilink 解析（非 Obsidian 用户、或文档里恰好有同形语法）：
-md-oss article.md --no-obsidian
+notepic-oss article.md --no-obsidian
 
 # MDX / HTML 同样工作，输出后缀跟随输入：
-md-oss post.mdx              # → post.oss.mdx
-md-oss page.html -i          # 直接覆盖
+notepic-oss post.mdx              # → post.oss.mdx
+notepic-oss page.html -i          # 直接覆盖
 ```
 
 `--in-place` 和 `-o/--output` 互斥；不指定时默认写到 `<原名>.oss<原后缀>`。
@@ -161,10 +161,10 @@ md-oss page.html -i          # 直接覆盖
 ## 项目结构
 
 ```
-md-image-oss/
-├── md_image_oss/
+notepic-oss/
+├── notepic_oss/
 │   ├── __init__.py
-│   ├── __main__.py      # python -m md_image_oss
+│   ├── __main__.py      # python -m notepic_oss
 │   ├── cli.py           # 命令行入口与参数解析
 │   ├── config.py        # 从环境变量加载配置
 │   ├── compressor.py    # 基于 Pillow 的图像压缩

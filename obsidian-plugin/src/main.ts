@@ -10,8 +10,8 @@ import {
 } from "obsidian";
 import {
   DEFAULT_SETTINGS,
-  MdImageOssSettingTab,
-  MdImageOssSettings,
+  NotePicOssSettingTab,
+  NotePicOssSettings,
   buildUploaderConfig,
   validateConfig,
 } from "./settings";
@@ -26,23 +26,23 @@ import {
 import { rewriteRef } from "./core/rewriter";
 import { ProgressNotice } from "./ui/ProgressNotice";
 import { FailureModal } from "./ui/FailureModal";
-import { ImagePanelView, VIEW_TYPE_MDOSS_PANEL } from "./ui/ImagePanelView";
+import { ImagePanelView, VIEW_TYPE_NOTEPIC_OSS_PANEL } from "./ui/ImagePanelView";
 import { t } from "./i18n";
 
-export default class MdImageOssPlugin extends Plugin {
-  settings!: MdImageOssSettings;
+export default class NotePicOssPlugin extends Plugin {
+  settings!: NotePicOssSettings;
 
   async onload(): Promise<void> {
     await this.loadSettings();
 
-    this.addSettingTab(new MdImageOssSettingTab(this.app, this));
+    this.addSettingTab(new NotePicOssSettingTab(this.app, this));
 
     // Register the right-side panel view + a left-rail ribbon entry to open it.
     this.registerView(
-      VIEW_TYPE_MDOSS_PANEL,
+      VIEW_TYPE_NOTEPIC_OSS_PANEL,
       (leaf) => new ImagePanelView(leaf, this),
     );
-    this.addRibbonIcon("image-up", "md-image-oss", () => {
+    this.addRibbonIcon("image-up", "notepic-oss", () => {
       void this.activatePanel();
     });
 
@@ -93,7 +93,7 @@ export default class MdImageOssPlugin extends Plugin {
   }
 
   async loadSettings(): Promise<void> {
-    const data = (await this.loadData()) as Partial<MdImageOssSettings> | null;
+    const data = (await this.loadData()) as Partial<NotePicOssSettings> | null;
     this.settings = Object.assign({}, DEFAULT_SETTINGS, data ?? {});
   }
 
@@ -109,15 +109,15 @@ export default class MdImageOssPlugin extends Plugin {
    */
   async activatePanel(): Promise<void> {
     const { workspace } = this.app;
-    const existing = workspace.getLeavesOfType(VIEW_TYPE_MDOSS_PANEL);
+    const existing = workspace.getLeavesOfType(VIEW_TYPE_NOTEPIC_OSS_PANEL);
     let leaf: WorkspaceLeaf | null = existing[0] ?? null;
     if (!leaf) {
       leaf = workspace.getRightLeaf(false) ?? workspace.getRightLeaf(true);
       if (!leaf) {
-        new Notice("md-image-oss: could not allocate a right-sidebar leaf");
+        new Notice("NotePic OSS: could not allocate a right-sidebar leaf");
         return;
       }
-      await leaf.setViewState({ type: VIEW_TYPE_MDOSS_PANEL, active: true });
+      await leaf.setViewState({ type: VIEW_TYPE_NOTEPIC_OSS_PANEL, active: true });
     }
     workspace.revealLeaf(leaf);
   }

@@ -29,16 +29,16 @@ const en = {
     openManager: "Open image manager for current note",
   },
   menu: {
-    uploadAll: "md-image-oss: Upload all images (in place)",
-    openManager: "md-image-oss: Open image manager",
+    uploadAll: "NotePic OSS: Upload all images (in place)",
+    openManager: "NotePic OSS: Open image manager",
   },
   notice: {
-    noImages: "md-image-oss: no images in this note",
-    pipelineError: (m: string) => `md-image-oss: pipeline error — ${m}`,
-    configMissing: (m: string) => `md-image-oss: ${m}. Open settings to configure.`,
-    connectionOk: "md-image-oss: connection OK ✅",
+    noImages: "NotePic OSS: no images in this note",
+    pipelineError: (m: string) => `NotePic OSS: pipeline error — ${m}`,
+    configMissing: (m: string) => `NotePic OSS: ${m}. Open settings to configure.`,
+    connectionOk: "NotePic OSS: connection OK ✅",
     connectionFailed: (m: string) =>
-      `md-image-oss: connection failed — ${m}. If this looks like CORS, add a rule allowing PUT/HEAD/DELETE from the app:// origin.`,
+      `NotePic OSS: connection failed — ${m}. If this looks like CORS, add a rule allowing PUT/HEAD/DELETE from the app:// origin.`,
   },
   validation: {
     accessKeyId: "Access Key ID is required",
@@ -85,7 +85,7 @@ const en = {
     safety_ram:
       "Use a dedicated RAM sub-account with only oss:PutObject / oss:GetObject / oss:HeadObject / oss:DeleteObject on the target bucket.",
     safety_storage:
-      "Credentials are stored in plaintext at .obsidian/plugins/md-image-oss/data.json. " +
+      "Credentials are stored in plaintext at .obsidian/plugins/notepic-oss/data.json. " +
       "If your vault is in a public Git repo, add that path to your vault's .gitignore.",
     safety_cors_prefix:
       "CORS rule on the bucket (Aliyun OSS console): Allowed origins ",
@@ -95,7 +95,7 @@ const en = {
     safety_cors_suffix: ".",
   },
   progress: {
-    title: "md-image-oss: uploading",
+    title: "NotePic OSS: uploading",
     preparing: "Preparing…",
     empty: "No images to upload.",
     progressOf: (done: number, total: number, current?: string) =>
@@ -162,16 +162,16 @@ const zh: typeof en = {
     openManager: "打开当前笔记的图片管理面板",
   },
   menu: {
-    uploadAll: "md-image-oss：上传全部图片（覆盖式）",
-    openManager: "md-image-oss：打开图片管理面板",
+    uploadAll: "NotePic OSS：上传全部图片（覆盖式）",
+    openManager: "NotePic OSS：打开图片管理面板",
   },
   notice: {
-    noImages: "md-image-oss：当前笔记里没有图片",
-    pipelineError: (m: string) => `md-image-oss：流程出错 — ${m}`,
-    configMissing: (m: string) => `md-image-oss：${m}。请到设置里填写。`,
-    connectionOk: "md-image-oss：连接成功 ✅",
+    noImages: "NotePic OSS：当前笔记里没有图片",
+    pipelineError: (m: string) => `NotePic OSS：流程出错 — ${m}`,
+    configMissing: (m: string) => `NotePic OSS：${m}。请到设置里填写。`,
+    connectionOk: "NotePic OSS：连接成功 ✅",
     connectionFailed: (m: string) =>
-      `md-image-oss：连接失败 — ${m}。如果看起来像跨域问题，请到 Bucket 的 CORS 设置里允许来自 app:// 的 PUT/HEAD/DELETE。`,
+      `NotePic OSS：连接失败 — ${m}。如果看起来像跨域问题，请到 Bucket 的 CORS 设置里允许来自 app:// 的 PUT/HEAD/DELETE。`,
   },
   validation: {
     accessKeyId: "Access Key ID 必填",
@@ -216,7 +216,7 @@ const zh: typeof en = {
     safety_ram:
       "建议使用专门的 RAM 子账号，只授予目标 Bucket 的 oss:PutObject / oss:GetObject / oss:HeadObject / oss:DeleteObject 权限。",
     safety_storage:
-      "凭据以明文保存在 .obsidian/plugins/md-image-oss/data.json。" +
+      "凭据以明文保存在 .obsidian/plugins/notepic-oss/data.json。" +
       "如果你的 Vault 是公开 Git 仓库，请把这个路径加进 Vault 的 .gitignore。",
     safety_cors_prefix:
       "Bucket 的 CORS 规则（阿里云 OSS 控制台）：来源 ",
@@ -226,7 +226,7 @@ const zh: typeof en = {
     safety_cors_suffix: "。",
   },
   progress: {
-    title: "md-image-oss：上传中",
+    title: "NotePic OSS：上传中",
     preparing: "准备中…",
     empty: "没有需要上传的图片。",
     progressOf: (done: number, total: number, current?: string) =>

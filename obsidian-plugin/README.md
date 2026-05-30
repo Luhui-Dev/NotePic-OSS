@@ -1,8 +1,8 @@
-# md-image-oss — Obsidian 插件
+# NotePic OSS — Obsidian 插件
 
 把当前笔记里引用的图片一键上传到阿里云 OSS，先压缩、再去重，最后就地重写图片链接 —— 全程不用离开 Obsidian。
 
-本插件是 [md-image-oss CLI](../README.md) 的姊妹形态。两端共用同一套 OSS 命名约定（`<prefix>/<sha256[:24]>.<ext>`），所以 CLI 上传过的图在插件里会被识别为「已在 OSS」直接跳过，反之亦然。
+本插件是 [NotePic OSS CLI](../README.md) 的姊妹形态。两端共用同一套 OSS 命名约定（`<prefix>/<sha256[:24]>.<ext>`），所以 CLI 上传过的图在插件里会被识别为「已在 OSS」直接跳过，反之亦然。
 
 ## 特性
 
@@ -21,14 +21,14 @@
 插件尚未提交到 Obsidian 社区插件市场。手动安装步骤：
 
 1. 从 GitHub Releases 下载 `main.js`、`manifest.json`、`styles.css`。
-2. 放到 `<你的 Vault>/.obsidian/plugins/md-image-oss/` 目录下。
+2. 放到 `<你的 Vault>/.obsidian/plugins/notepic-oss/` 目录下。
 3. 重启 Obsidian（或在 **设置 → 第三方插件** 里关掉再打开本插件）。
 
 > 如果在 **设置 → 第三方插件** 里看不到本插件，请先关闭顶部的「受限模式 / Restricted mode」横幅。
 
 ## 配置
 
-打开 **设置 → md-image-oss**，按如下字段填写：
+打开 **设置 → NotePic OSS**，按如下字段填写：
 
 | 字段 | 说明 |
 |---|---|
@@ -56,14 +56,14 @@
 
 在任意 Markdown 笔记（`.md` / `.mdx`）里，按 ⌘P 打开命令面板，运行：
 
-- **md-image-oss：上传当前笔记中的所有图片到 OSS（覆盖式）** —— 扫描当前笔记，上传所有本地图片并替换为 OSS URL。
-- **md-image-oss：打开当前笔记的图片管理面板** —— 弹出 Modal，列出所有图片的缩略图、体积、状态徽章；可在 *全部 / 仅本地 / 尚未上传 / 缺失* 之间过滤，勾选要上传的图片后点 *上传 N 项*。
+- **NotePic OSS：上传当前笔记中的所有图片到 OSS（覆盖式）** —— 扫描当前笔记，上传所有本地图片并替换为 OSS URL。
+- **NotePic OSS：打开当前笔记的图片管理面板** —— 弹出 Modal，列出所有图片的缩略图、体积、状态徽章；可在 *全部 / 仅本地 / 尚未上传 / 缺失* 之间过滤，勾选要上传的图片后点 *上传 N 项*。
 
 两个命令同样出现在笔记右上角的 **More options** 菜单和编辑器右键菜单里。插件不预设快捷键，需要的话请到 **设置 → 快捷键** 自行绑定。
 
 ## 安全建议
 
-- 凭据以明文保存在 `.obsidian/plugins/md-image-oss/data.json`。如果你的 Vault 是公开的 Git 仓库，请把 `.obsidian/plugins/*/data.json` 加进 Vault 的 `.gitignore`。
+- 凭据以明文保存在 `.obsidian/plugins/notepic-oss/data.json`。如果你的 Vault 是公开的 Git 仓库，请把 `.obsidian/plugins/*/data.json` 加进 Vault 的 `.gitignore`。
 - 永远使用 RAM 子账号填到这里，**不要** 用阿里云主账号的 AK。
 
 ## 与 CLI 的对应关系
@@ -93,9 +93,9 @@ npm test         # vitest
 
 ```bash
 # 进到 obsidian-plugin/
-ln -sf "$(pwd)/main.js"      "<vault>/.obsidian/plugins/md-image-oss/main.js"
-ln -sf "$(pwd)/manifest.json" "<vault>/.obsidian/plugins/md-image-oss/manifest.json"
-ln -sf "$(pwd)/styles.css"   "<vault>/.obsidian/plugins/md-image-oss/styles.css"
+ln -sf "$(pwd)/main.js"      "<vault>/.obsidian/plugins/notepic-oss/main.js"
+ln -sf "$(pwd)/manifest.json" "<vault>/.obsidian/plugins/notepic-oss/manifest.json"
+ln -sf "$(pwd)/styles.css"   "<vault>/.obsidian/plugins/notepic-oss/styles.css"
 ```
 
 每次 rebuild 后回到 Obsidian 重载工作区（⌘R）即可。

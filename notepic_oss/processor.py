@@ -346,7 +346,7 @@ class _BaseProcessor:
         if url.startswith(("http://", "https://")):
             req = urllib.request.Request(
                 url,
-                headers={"User-Agent": "md-image-oss/0.1 (+https://github.com/)"},
+                headers={"User-Agent": "notepic-oss/0.1 (+https://github.com/)"},
             )
             with urllib.request.urlopen(req, timeout=30) as resp:
                 data = resp.read()

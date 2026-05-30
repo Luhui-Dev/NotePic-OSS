@@ -1,4 +1,4 @@
-"""Command-line interface for md-image-oss."""
+"""Command-line interface for notepic-oss."""
 
 from __future__ import annotations
 
@@ -17,7 +17,7 @@ _HTML_SUFFIXES = {".html", ".htm"}
 
 def build_parser() -> argparse.ArgumentParser:
     parser = argparse.ArgumentParser(
-        prog="md-oss",
+        prog="notepic-oss",
         description=(
             "Upload all images referenced in a Markdown / MDX / HTML document "
             "to Aliyun OSS, compress them first, and rewrite the document."

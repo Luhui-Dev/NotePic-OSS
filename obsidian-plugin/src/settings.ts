@@ -1,9 +1,9 @@
 import { App, Notice, PluginSettingTab, Setting } from "obsidian";
-import type MdImageOssPlugin from "./main";
+import type NotePicOssPlugin from "./main";
 import { Uploader } from "./core/uploader";
 import { t } from "./i18n";
 
-export interface MdImageOssSettings {
+export interface NotePicOssSettings {
   accessKeyId: string;
   accessKeySecret: string;
   endpoint: string;
@@ -17,7 +17,7 @@ export interface MdImageOssSettings {
   concurrency: number;
 }
 
-export const DEFAULT_SETTINGS: MdImageOssSettings = {
+export const DEFAULT_SETTINGS: NotePicOssSettings = {
   accessKeyId: "",
   accessKeySecret: "",
   endpoint: "",
@@ -30,7 +30,7 @@ export const DEFAULT_SETTINGS: MdImageOssSettings = {
   concurrency: 3,
 };
 
-export function buildUploaderConfig(s: MdImageOssSettings) {
+export function buildUploaderConfig(s: NotePicOssSettings) {
   return {
     accessKeyId: s.accessKeyId.trim(),
     accessKeySecret: s.accessKeySecret.trim(),
@@ -41,7 +41,7 @@ export function buildUploaderConfig(s: MdImageOssSettings) {
   };
 }
 
-export function validateConfig(s: MdImageOssSettings): string | null {
+export function validateConfig(s: NotePicOssSettings): string | null {
   const V = t().validation;
   if (!s.accessKeyId.trim()) return V.accessKeyId;
   if (!s.accessKeySecret.trim()) return V.accessKeySecret;
@@ -50,10 +50,10 @@ export function validateConfig(s: MdImageOssSettings): string | null {
   return null;
 }
 
-export class MdImageOssSettingTab extends PluginSettingTab {
+export class NotePicOssSettingTab extends PluginSettingTab {
   constructor(
     app: App,
-    private readonly plugin: MdImageOssPlugin,
+    private readonly plugin: NotePicOssPlugin,
   ) {
     super(app, plugin);
   }
@@ -216,7 +216,7 @@ export class MdImageOssSettingTab extends PluginSettingTab {
         b.setButtonText(S.test_button).onClick(async () => {
           const err = validateConfig(this.plugin.settings);
           if (err) {
-            new Notice(`md-image-oss: ${err}`);
+            new Notice(`NotePic OSS: ${err}`);
             return;
           }
           b.setDisabled(true).setButtonText(S.test_running);

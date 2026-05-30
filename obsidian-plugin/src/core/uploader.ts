@@ -1,4 +1,4 @@
-// Aliyun OSS uploader. Mirrors md_image_oss/uploader.py:
+// Aliyun OSS uploader. Mirrors notepic_oss/uploader.py:
 //   key = `${prefix}/${sha256(data)[:24]}${ext}`  (prefix is optional)
 //   short-circuit via headObject(key)
 //   isOwnUrl tests custom_domain OR `${bucket}.${endpoint}`
@@ -120,7 +120,7 @@ export class Uploader {
   /** Probe: PUT then HEAD then DELETE a 1-byte object to validate creds + CORS. */
   async probe(): Promise<void> {
     const client = await this.ensureClient();
-    const key = (this.config.prefix ? this.config.prefix + "/" : "") + ".md-image-oss-probe";
+    const key = (this.config.prefix ? this.config.prefix + "/" : "") + ".notepic-oss-probe";
     const blob = new Blob([new Uint8Array([0x4f]) as BlobPart], { type: "text/plain" });
     await client.put(key, blob, { headers: { "Content-Type": "text/plain" } });
     await client.head(key);

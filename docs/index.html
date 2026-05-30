@@ -4,9 +4,9 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>md-image-oss · Markdown 图片自动上阿里云 OSS</title>
+  <title>NotePic OSS · Markdown 图片自动上阿里云 OSS</title>
   <meta name="description"
-    content="md-image-oss 把 Markdown / MDX / HTML 里的本地图片自动上传到阿里云 OSS，压缩、去重、原地改链接。提供命令行工具和 Obsidian 插件两种形态。">
+    content="NotePic OSS 把 Markdown / MDX / HTML 里的本地图片自动上传到阿里云 OSS，压缩、去重、原地改链接。提供命令行工具和 Obsidian 插件两种形态。">
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="stylesheet" href="style.css">
 </head>
@@ -16,7 +16,7 @@
   <!-- ============ Top status bar ============ -->
   <header class="topbar">
     <div class="topbar-inner">
-      <a class="brand" href="#top" aria-label="Luhui-Dev/md-image-oss">
+      <a class="brand" href="#top" aria-label="Luhui-Dev/notepic-oss">
         <span class="brand-mark" aria-hidden="true">
           <svg viewBox="0 0 24 24">
             <circle cx="9" cy="12" r="6" />
@@ -25,7 +25,7 @@
         </span>
         <span class="brand-path">
           <span class="brand-org">Luhui-Dev</span><span class="brand-slash">/</span><span
-            class="brand-name">md-image-oss</span>
+            class="brand-name">NotePic OSS</span>
         </span>
       </a>
       <nav class="topbar-meta" aria-label="项目元数据">
@@ -35,7 +35,7 @@
         <span class="sep">/</span>
         <span class="hide-sm">Aliyun OSS</span>
         <span class="sep hide-sm">/</span>
-        <a href="https://github.com/Luhui-Dev/md-image-oss" target="_blank" rel="noopener">GitHub ↗</a>
+        <a href="https://github.com/Luhui-Dev/notepic-oss" target="_blank" rel="noopener">GitHub ↗</a>
       </nav>
     </div>
   </header>
@@ -43,7 +43,7 @@
   <main id="top">
 
     <!-- ============ Hero ============ -->
-    <section class="hero" aria-label="md-image-oss">
+    <section class="hero" aria-label="NotePic OSS">
       <svg class="hero-canvas" viewBox="0 0 1200 600" preserveAspectRatio="xMidYMid slice" aria-hidden="true">
         <!-- L1: 对角辅助线（最深层） -->
         <g class="guides" aria-hidden="true">
@@ -160,7 +160,7 @@
           EST. 2026 · A CLI &amp; OBSIDIAN PLUGIN
         </p>
         <h1 class="tagline">
-          <span class="visually-hidden">md-image-oss · </span>
+          <span class="visually-hidden">NotePic OSS · </span>
           <span class="tag-bracket" aria-hidden="true">[</span>
           Markdown 图片自动上阿里云 OSS
           <span class="tag-bracket" aria-hidden="true">]</span>
@@ -205,9 +205,9 @@
           </svg>
           <h3 class="path-title">命令行工具</h3>
           <p class="path-desc">在终端处理 <code>.md</code> / <code>.mdx</code> / <code>.html</code>，适合批量、CI、博客发布流程。</p>
-          <pre class="path-sample" aria-label="示例命令"><span class="prompt">$</span> pip install md-image-oss
-<span class="prompt">$</span> md-oss article.md -i</pre>
-          <a class="btn btn-primary" href="https://github.com/Luhui-Dev/md-image-oss" target="_blank" rel="noopener">
+          <pre class="path-sample" aria-label="示例命令"><span class="prompt">$</span> pip install notepic-oss
+<span class="prompt">$</span> notepic-oss article.md -i</pre>
+          <a class="btn btn-primary" href="https://github.com/Luhui-Dev/notepic-oss" target="_blank" rel="noopener">
             <span>前往 GitHub 仓库</span>
             <span class="btn-arrow" aria-hidden="true">→</span>
           </a>
@@ -234,7 +234,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
             <span>即将上架官方插件库</span>
             <span class="btn-arrow" aria-hidden="true">→</span>
           </button>
-          <a class="link-secondary" href="https://github.com/Luhui-Dev/md-image-oss/tree/main/obsidian-plugin"
+          <a class="link-secondary" href="https://github.com/Luhui-Dev/notepic-oss/tree/main/obsidian-plugin"
             target="_blank" rel="noopener">
             先去看插件 README →
           </a>
@@ -272,7 +272,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
     <section class="features section" aria-label="特性">
       <header class="section-head">
         <span class="section-no">03 / 04</span>
-        <h2 class="section-title">为什么是 md-image-oss</h2>
+        <h2 class="section-title">为什么是 NotePic OSS</h2>
         <p class="section-deck">五条克制的、彼此独立的设计选择。</p>
       </header>
 
@@ -351,7 +351,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
         </div>
         <div class="term-line">
           <span class="prompt">$</span>
-          <code id="cmd-1">pip install md-image-oss</code>
+          <code id="cmd-1">pip install notepic-oss</code>
           <button class="copy-btn" type="button" data-copy-target="cmd-1" aria-label="复制：安装命令">复制</button>
         </div>
 
@@ -360,7 +360,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
         </div>
         <div class="term-line">
           <span class="prompt">$</span>
-          <code id="cmd-2">md-oss article.md --env-file .env</code>
+          <code id="cmd-2">notepic-oss article.md --env-file .env</code>
           <button class="copy-btn" type="button" data-copy-target="cmd-2" aria-label="复制：处理命令">复制</button>
         </div>
 
@@ -369,7 +369,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
         </div>
         <div class="term-line">
           <span class="prompt">$</span>
-          <code id="cmd-3">md-oss article.md -i --env-file .env</code>
+          <code id="cmd-3">notepic-oss article.md -i --env-file .env</code>
           <span class="caret" aria-hidden="true"></span>
           <button class="copy-btn" type="button" data-copy-target="cmd-3" aria-label="复制：原地覆盖命令">复制</button>
         </div>
@@ -377,7 +377,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
 
       <p class="quickstart-note">
         需要先在 <code>.env</code> 里配置阿里云 OSS 凭证 —— 完整说明见
-        <a href="https://github.com/Luhui-Dev/md-image-oss#readme" target="_blank" rel="noopener">仓库 README ↗</a>
+        <a href="https://github.com/Luhui-Dev/notepic-oss#readme" target="_blank" rel="noopener">仓库 README ↗</a>
       </p>
     </section>
 
@@ -388,7 +388,7 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
     <div class="foot-grid">
       <div class="foot-col">
         <span class="foot-label">PROJECT</span>
-        <p>md-image-oss</p>
+        <p>NotePic OSS</p>
         <p class="foot-mute">Markdown · MDX · HTML</p>
       </div>
       <div class="foot-col">
@@ -403,8 +403,8 @@ CLI 和插件传出的链接 <em>完全一致</em>。</pre>
       </div>
       <div class="foot-col">
         <span class="foot-label">FIND</span>
-        <p><a href="https://github.com/Luhui-Dev/md-image-oss" target="_blank" rel="noopener">GitHub ↗</a></p>
-        <p class="foot-mute"><a href="https://github.com/Luhui-Dev/md-image-oss/issues" target="_blank"
+        <p><a href="https://github.com/Luhui-Dev/notepic-oss" target="_blank" rel="noopener">GitHub ↗</a></p>
+        <p class="foot-mute"><a href="https://github.com/Luhui-Dev/notepic-oss/issues" target="_blank"
             rel="noopener">Issues ↗</a></p>
       </div>
     </div>
