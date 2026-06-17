@@ -58,7 +58,7 @@ false  其他情况
 
 ### 3.4 Content-Type 赋值
 
-两端都必须从一张**以扩展名为 key 的静态表**中解析 `Content-Type`，不能依赖平台相关的 API（Python 的 `mimetypes.guess_type` 读取操作系统自带的 mime 数据库，不能保证与 TypeScript 端的静态 `MIME` 表一致——见 §6 中的待办项）。
+两端都必须从一张**以扩展名为 key 的静态表**中解析 `Content-Type`，不能依赖平台相关的 API（Python 的 `mimetypes.guess_type` 读取操作系统自带的 mime 数据库，不能保证与 TypeScript 端的静态 `MIME` 表一致）。两端已对齐：CLI 是 `uploader.py` 里的 `_CONTENT_TYPES`，Obsidian 是 `uploader.ts` 里的 `MIME`，都是下表的逐字复刻，必须保持同步。
 
 权威对照表（按字母顺序扩展，两端务必保持同步）：
 
@@ -117,7 +117,6 @@ false  其他情况
 
 （不阻塞 `1.0` 打标签；记录于此是为了不被误认成“故意如此”的设计。）
 
-- CLI 的 `Content-Type` 查找用的是 `mimetypes.guess_type`（依赖运行平台），而不是 §3.4 中定义的静态表。
 - 两个包的发布 CI 目前都不会校验两个仓库的 `PROTOCOL_VERSION` 是否一致，这一步还需要人工跨仓库核对。要自动化的话，需要两个仓库共享一个 submodule，或者在 CI 时由一方去抓取另一方的常量——目前尚未实现。
 
 ## 7. 如何声明合规
