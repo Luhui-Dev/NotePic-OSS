@@ -102,8 +102,12 @@ false  其他情况
   - `quality < 100`：量化为 256 色调色板（保留 alpha 通道），CLI 用 Pillow `Image.quantize(colors=256, method=Image.Quantize.FASTOCTREE)`，Obsidian 用 UPNG.js `cnum=256`。两者算法路线不同，产出字节不要求一致（仍属于 §4，不要求位级对齐），但“质量旋钮在哪个值切换有损/无损”这件事两端必须一致，否则同一份配置在两端会有完全不同的视觉结果，这才是真正会让用户困惑的分歧。
   - 任何一端要改变这个切换阈值（例如改成按百分比线性插值色彩数），必须同时改两端并在同一次提交里说明。
 
-  “未知格式带 alpha 通道”的回退路径仍有分歧（CLI 回退到 PNG；Obsidian 始终拍平为 JPEG），已记录为待办项（§6）。
-- 4.2 远程图片的扩展名探测顺序（先看 Content-Type 头还是先看 URL 路径）——目前两端存在分歧。已记录为待办项（§6）。
+  “未知格式带 alpha 通道”的回退路径两端已对齐：解码后的像素只要带透明度，就回退到上面的 PNG 路径（同样按 `quality` 决定无损/量化）；否则拍平为 JPEG。
+
+  唯一允许保留的差异（永久性平台限制，不是 bug）：CLI 用 PIL 的图像 mode（`RGBA`/`LA`/`P`）判断"是否有 alpha 通道"，这是一个结构性判断——哪怕通道里所有像素都不透明，只要 mode 带 alpha 就会走 PNG 路径；浏览器的 Canvas/`ImageBitmap` API 解码后只剩裸 RGBA 像素，无法还原"原始格式是否带 alpha 通道"这个结构信息，所以 Obsidian 端改成扫描解码后的像素，只要存在任意一个 alpha<255 的像素就判定为"有透明度"。两端因此只在"有 alpha 通道但全图不透明"这一冷僻场景上可能选择不同的输出格式（一个存 PNG，一个存 JPEG）——参照 §5 的精神，这属于平台能力差异，不需要也不应该试图消除。
+- 4.2 远程图片的扩展名探测顺序（先看 Content-Type 头还是先看 URL 路径）。
+
+  两端已对齐为：先精确匹配 Content-Type 头（忽略 `;charset=...` 等参数，大小写不敏感）；查不到再退回 URL 路径后缀；两者都没有则默认 `.jpg`。Content-Type → 扩展名的对照表是 §3.4 那张表的反向映射（CLI：`processor.py` 的 `_CONTENT_TYPE_EXT`；Obsidian：`pipeline.ts` 的 `CONTENT_TYPE_EXT`），必须保持同步。选择"Content-Type 优先"是因为很多图床/CDN 的 URL 不带扩展名或扩展名不可信，而 Content-Type 头通常更可靠；之前 Obsidian 用的是子串匹配（如 `ct.includes("png")`），会被 `image/apng` 之类的类型误判，现在改成对完整 mime 值做精确匹配。
 
 ## 5. 明确允许两端不一致的行为
 
@@ -113,8 +117,6 @@ false  其他情况
 
 （不阻塞 `1.0` 打标签；记录于此是为了不被误认成“故意如此”的设计。）
 
-- 未知图片格式的 alpha 回退路径不同（CLI 回退到 PNG；Obsidian 始终拍平为 JPEG）。
-- 远程图片扩展名探测顺序不同（CLI：仅看 URL 路径；Obsidian：先看 Content-Type 再看 URL 路径）。
 - CLI 的 `Content-Type` 查找用的是 `mimetypes.guess_type`（依赖运行平台），而不是 §3.4 中定义的静态表。
 - 两个包的发布 CI 目前都不会校验两个仓库的 `PROTOCOL_VERSION` 是否一致，这一步还需要人工跨仓库核对。要自动化的话，需要两个仓库共享一个 submodule，或者在 CI 时由一方去抓取另一方的常量——目前尚未实现。
 
