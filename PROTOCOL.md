@@ -117,10 +117,14 @@ false  其他情况
 
 （不阻塞 `1.0` 打标签；记录于此是为了不被误认成“故意如此”的设计。）
 
-- 两个包的发布 CI 目前都不会校验两个仓库的 `PROTOCOL_VERSION` 是否一致，这一步还需要人工跨仓库核对。要自动化的话，需要两个仓库共享一个 submodule，或者在 CI 时由一方去抓取另一方的常量——目前尚未实现。
+目前为空——上一轮的最后一项（CI 跨仓库校验 `PROTOCOL_VERSION`）已经在 §7 落地。
 
 ## 7. 如何声明合规
 
 - CLI：`notepic-oss --version` 必须同时打印包版本号和协议版本号，例如 `notepic-oss 1.0.0 (protocol 1.0)`。
 - Obsidian：设置页底部必须显示协议版本号，并应在插件加载时通过 `console.debug` 打一行日志，方便支持/排障时确认。
-- 两个包的发布 CI 理论上都应该在涉及 §3 范围内文件改动的发布前，校验两个仓库的 `PROTOCOL_VERSION` 是否一致。
+- 两个包的发布 CI 在打 tag 触发发布时，会跑 `scripts/check-protocol-version.sh`：通过公网 GitHub API 取对方仓库**最新一次 GitHub Release** 对应 tag 上的 `PROTOCOL_VERSION`（CLI 读对方的 `src/protocol.ts`，Obsidian 读对方的 `notepic_oss/__init__.py`），与本仓库即将发布的版本号比较，不一致就 `exit 1` 拦截发布。
+  - 比较对象是"对方已发布的版本"而不是"对方 main 分支 HEAD"——因为 §1 约束的是发布态而非源码态，比 main 会被对方一个还没发布的协议号改动误触发拦截。
+  - 两边目前公开仓库都不需要鉴权即可读取；workflow 里传 `secrets.GITHUB_TOKEN` 只是把 API 速率限制从 60/h 提到 5000/h。
+  - **逃生舱：** 跨仓库严格互相校验会在"两端同步升级协议版本"时死锁（无论谁先发布都会因为对方还没发布新版本而被挡）。两边的 `release.yml` 都加了 `workflow_dispatch` 触发器和 `skip_protocol_check` 布尔输入：协调式升级时，对着已经打好的 tag 手动 dispatch 一次并勾选跳过来打头阵发布，另一侧再走正常的 `push: tags` 流程即可通过校验。
+  - **引入期的宽松处理：** 如果对方仓库最新发布的 tag 还没有 `PROTOCOL_VERSION`（即那次发布早于协议版本号机制本身），脚本会打印 warning 并直接放行（`exit 0`），不会因为"协议版本号这个概念还没普及到对方的发布历史里"而永久卡死。截至本次修订，两个仓库的最新 tag（CLI `v1.0.0`、Obsidian `1.2.0`）都还处于这个状态，下一次各自发布后该警告会自动消失。
